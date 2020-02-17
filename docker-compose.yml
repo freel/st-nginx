@@ -1,8 +1,17 @@
-version: '3.2'
+version: '3'
 services:
-  nginx:
-    image: nginx
+  web:
+    image: nginx:stable
     volumes:
-      - ./config/conf.d:/etc/nginx/conf.d/load-balancer.conf
+      - ./config/load-balancer.conf:/etc/nginx/conf.d/load-balancer.conf ro
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
+    environment:
+      - NGINX_PORT=80
+    networks:
+      - elk
+
+networks:
+  elk:
+    driver: bridge
