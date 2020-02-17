@@ -1,0 +1,8 @@
+version: '3.2'
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./config/conf.d:/etc/nginx/conf.d/load-balancer.conf
+    ports:
+      - "8080:80"
